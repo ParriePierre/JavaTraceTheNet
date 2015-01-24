@@ -1,9 +1,11 @@
-package Main;
+package controller;
 
 import java.io.IOException;
 
-import traceRoutePackage.*;
-import view.*;
+import controller.Controller;
+import traceRoutePackage.TraceRouteExec;
+import view.TraceRouteUI;
+
 
 public class MainClass {
 
@@ -15,11 +17,15 @@ public class MainClass {
 		try {
 			TraceRouteExec tre = new TraceRouteExec();
 			TraceRouteUI trui=new TraceRouteUI();
-			Controller c=new Controller(trui,tre);
+			Controller c=new Controller();
+			c.setView(trui);
+			c.setModel(tre);
 			c.start();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

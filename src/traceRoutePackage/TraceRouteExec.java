@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.Process;
-import java.lang.ProcessBuilder;
 
 public class TraceRouteExec {
 	public TraceRouteExec() throws IOException, InterruptedException {
