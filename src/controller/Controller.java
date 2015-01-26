@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import traceRoutePackage.TraceRouteExec;
 import view.TraceRouteUI;
@@ -60,6 +61,11 @@ public class Controller extends Application {
 		Button traceIt=new Button("Trace it!");
 		
 		generate.setOnAction(getRandomAddress(getIp));
+		traceIt.setOnAction(getTraceAction(model, getIp,primaryStage));
+		
+		Popup p = new Popup();
+		
+		p.hide();
 		
 		GridPane gp=new GridPane();
 		BorderPane bp=new BorderPane();
@@ -82,6 +88,11 @@ public class Controller extends Application {
 	public GenerateRandomAdress getRandomAddress(TextField address)
 	{
 		return new GenerateRandomAdress(address);
+	}
+	
+	public TraceRouteAction getTraceAction(TraceRouteExec model, TextField address, Stage primaryStage)
+	{
+		return new TraceRouteAction(model, address,primaryStage);
 	}
 
 }
