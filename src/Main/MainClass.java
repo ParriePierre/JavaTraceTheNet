@@ -23,10 +23,10 @@ public class MainClass {
         Pattern pattern;
         Matcher matcher;
         String ip;
-        String[] ips = null;
+        String[] ips = new String[200];
         TraceRouteExec trace = new TraceRouteExec();
         ip = trace.getIp();
-        int i=0;
+        int i = 0;
         System.out.println(ip);
 
         try {
@@ -34,8 +34,9 @@ public class MainClass {
             pattern = Pattern.compile(IPADDRESS_PATTERN);
             matcher = pattern.matcher(ip);
             while (matcher.find()) {
-                ips[i]= matcher.group();
-               
+
+                ips[i] = matcher.group();
+
                 System.out.println(ips[i]);
                 i++;
             }
