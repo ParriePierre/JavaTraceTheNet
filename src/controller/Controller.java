@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+import traceRoutePackage.IpMatcher;
 import traceRoutePackage.TraceRouteExec;
 import view.TraceRouteUI;
 
@@ -18,7 +19,7 @@ public class Controller extends Application {
 	
 	public TraceRouteUI view;
 	
-	public TraceRouteExec model;
+	public IpMatcher model;
 	
 	public Controller() throws Exception
 	{
@@ -31,7 +32,7 @@ public class Controller extends Application {
 		view.setController(this);
 	}
 	
-	public void setModel(TraceRouteExec model)
+	public void setModel(IpMatcher model)
 	{
 		this.model=model;
 	}
@@ -90,7 +91,7 @@ public class Controller extends Application {
 		return new GenerateRandomAdress(address);
 	}
 	
-	public TraceRouteAction getTraceAction(TraceRouteExec model, TextField address, Stage primaryStage)
+	public TraceRouteAction getTraceAction(IpMatcher model, TextField address, Stage primaryStage)
 	{
 		return new TraceRouteAction(model, address,primaryStage);
 	}

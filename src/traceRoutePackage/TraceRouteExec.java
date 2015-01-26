@@ -9,11 +9,12 @@ import java.io.InputStreamReader;
 public class TraceRouteExec {
 
     String chaine = "";
+    String adress;
 
-    public TraceRouteExec() throws IOException, InterruptedException {
-
+    public TraceRouteExec(String Adress) throws IOException, InterruptedException {
+        adress = Adress;
         //Launches the sub process
-        Process p = Runtime.getRuntime().exec("Java -jar fakeroute.jar ece.fr");
+        Process p = Runtime.getRuntime().exec("Java -jar fakeroute.jar " + adress);
 
         //Get its output stream
         InputStream in = p.getInputStream();

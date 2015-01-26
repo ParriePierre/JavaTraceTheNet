@@ -9,16 +9,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+import traceRoutePackage.IpMatcher;
 
 public class TraceRouteAction implements EventHandler<javafx.event.ActionEvent> {
 	
-	private final TraceRouteExec model;
+	private final IpMatcher model;
 	
 	private final TextField address;
 	
 	private final Stage primaryStage;
 	
-	TraceRouteAction(TraceRouteExec model, TextField address, Stage primaryStage)
+	TraceRouteAction(IpMatcher model, TextField address, Stage primaryStage)
 	{
 		this.model=model;
 		this.address=address;
@@ -29,7 +30,7 @@ public class TraceRouteAction implements EventHandler<javafx.event.ActionEvent> 
 	public void handle(ActionEvent arg0) {
 		if(address.getText().isEmpty())
 		{
-			Popup p=new Popup();
+			final Popup p=new Popup();
 			Label l = new Label("No adress entered");
 			Button hide = new Button("OK");
 			hide.setOnAction(new EventHandler<ActionEvent>() {
