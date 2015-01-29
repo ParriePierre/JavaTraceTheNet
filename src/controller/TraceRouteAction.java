@@ -1,6 +1,7 @@
 package controller;
 
-import traceRoutePackage.TraceRouteExec;
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -11,19 +12,23 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 import traceRoutePackage.IpMatcher;
 
+
 public class TraceRouteAction implements EventHandler<javafx.event.ActionEvent> {
 	
-	private final IpMatcher model;
+	private IpMatcher model;
 	
 	private final TextField address;
 	
+	private final Controller ct;
+	
 	private final Stage primaryStage;
 	
-	TraceRouteAction(IpMatcher model, TextField address, Stage primaryStage)
+	TraceRouteAction(IpMatcher model, TextField address, Stage primaryStage, Controller ct)
 	{
 		this.model=model;
 		this.address=address;
 		this.primaryStage=primaryStage;
+		this.ct=ct;
 	}
 
 	@Override
@@ -47,7 +52,12 @@ public class TraceRouteAction implements EventHandler<javafx.event.ActionEvent> 
 		}
 		else
 		{
-			
+			try {
+				ct.traceRoute(address.getText());
+			} catch (IOException | InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 

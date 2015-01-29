@@ -17,12 +17,12 @@ public class IpMatcher {
             + "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
             + "([01]?\\d\\d?|2[0-4]\\d|25[0-5]))|"
             + "((\\d\\d\\d)\\.(\\d\\d\\d)|(\\d\\d)\\.(\\d\\d\\d)|(\\d)\\.(\\d\\d\\d))";
-    String[] ips = new String[200];
-
-    public IpMatcher(String adress) throws IOException, InterruptedException{
+    
+    public String[] getIps(String adress) throws IOException, InterruptedException{
         Pattern pattern;
         Matcher matcher;
         String ip;
+        String[] ips=new String[200];
         
         TraceRouteExec trace = new TraceRouteExec(adress);
         ip = trace.getIp();
@@ -34,7 +34,7 @@ public class IpMatcher {
             pattern = Pattern.compile(IPADDRESS_PATTERN);
             matcher = pattern.matcher(ip);
             while (matcher.find()) {
-
+       
                 ips[i] = matcher.group();
 
                 System.out.println(ips[i]);
@@ -43,10 +43,7 @@ public class IpMatcher {
         } catch (PatternSyntaxException pse) {
             pse.printStackTrace();
         }
+		return ips;
     }
-    
-    public String[] getip(){
-        return ips;
-    }
-
+   
 }

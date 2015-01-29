@@ -14,7 +14,7 @@ public class TraceRouteExec {
     public TraceRouteExec(String Adress) throws IOException, InterruptedException {
         adress = Adress;
         //Launches the sub process
-        Process p = Runtime.getRuntime().exec("Java -jar fakeroute.jar " + adress);
+        Process p = Runtime.getRuntime().exec("java -jar fakeroute.jar " + adress);
 
         //Get its output stream
         InputStream in = p.getInputStream();

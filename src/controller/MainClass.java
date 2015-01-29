@@ -2,8 +2,7 @@ package controller;
 
 import java.io.IOException;
 
-import controller.Controller;
-import traceRoutePackage.*;
+import traceRoutePackage.IpMatcher;
 import view.TraceRouteUI;
 
 
@@ -17,8 +16,7 @@ public class MainClass {
 		
 		try {
 			//TraceRouteExec tre = new TraceRouteExec();
-                        IpMatcher ip = new IpMatcher("ece.fr");
-                        ip.getip();
+            IpMatcher ip = new IpMatcher();
 			TraceRouteUI trui=new TraceRouteUI();
 			Controller c=new Controller();
 			c.setView(trui);

@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -12,7 +14,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import traceRoutePackage.IpMatcher;
-import traceRoutePackage.TraceRouteExec;
 import view.TraceRouteUI;
 
 public class Controller extends Application {
@@ -60,16 +61,16 @@ public class Controller extends Application {
 		Label ip=new Label("IP Address");
 		Button generate=new Button("Generate random address");
 		Button traceIt=new Button("Trace it!");
+		BorderPane bp=new BorderPane();
 		
 		generate.setOnAction(getRandomAddress(getIp));
-		traceIt.setOnAction(getTraceAction(model, getIp,primaryStage));
+		traceIt.setOnAction(getTraceAction(model, getIp,primaryStage, this));
 		
 		Popup p = new Popup();
 		
 		p.hide();
 		
 		GridPane gp=new GridPane();
-		BorderPane bp=new BorderPane();
 		
 		gp.add(ip, 1, 1);
 		gp.add(getIp, 2, 1);
@@ -91,9 +92,14 @@ public class Controller extends Application {
 		return new GenerateRandomAdress(address);
 	}
 	
-	public TraceRouteAction getTraceAction(IpMatcher model, TextField address, Stage primaryStage)
+	public TraceRouteAction getTraceAction(IpMatcher model, TextField address, Stage primaryStage, Controller ct)
 	{
-		return new TraceRouteAction(model, address,primaryStage);
+		return new TraceRouteAction(model, address,primaryStage, ct);
+	}
+	
+	public String[] traceRoute (String address) throws IOException, InterruptedException
+	{
+		return model.getIps(address);
 	}
 
 }
