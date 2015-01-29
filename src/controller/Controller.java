@@ -1,8 +1,13 @@
 package controller;
 
 import java.io.IOException;
+import java.util.Random;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -22,10 +27,8 @@ public class Controller extends Application {
 	
 	public IpMatcher model;
 	
-	public Controller() throws Exception
-	{
-		
-	}
+	@FXML
+	private TextField ipAddress;
 	
 	public void setView(TraceRouteUI view)
 	{
@@ -55,8 +58,12 @@ public class Controller extends Application {
         Group root = new Group();
         Scene scene = new Scene(root, 640, 480, Color.WHITE);
         
+        FXMLLoader loader =new FXMLLoader();
+        loader.setLocation(getClass().getResource("/view/TraceRouteInterface.fxml"));
+        BorderPane bp= (BorderPane) loader.load();
+            
         //view.launch();
-        
+        /*
         TextField getIp=new TextField();
 		Label ip=new Label("IP Address");
 		Button generate=new Button("Generate random address");
@@ -78,13 +85,63 @@ public class Controller extends Application {
 		gp.add(traceIt,4,1);
 		
 		bp.setTop(gp);
-		
-		//this.getChildren().add(bp);
+		*/
         
         root.getChildren().add(bp);
         
         primaryStage.setScene(scene);
         primaryStage.show();
+	}
+	
+	@FXML
+	private void generateRandomIpButton()
+	{
+		Random rd = new Random();
+		StringBuilder sb=new StringBuilder();
+		int a,b,c,d;
+		
+		a=rd.nextInt(256);
+		b=rd.nextInt(256);
+		c=rd.nextInt(256);
+		d=rd.nextInt(256);
+		sb.append(a);
+		sb.append(".");
+		sb.append(b);
+		sb.append(".");
+		sb.append(c);
+		sb.append(".");
+		sb.append(d);
+		
+		ipAddress.setText(sb.toString());
+	}
+	
+	@FXML
+	private void traceRouteButton()
+	{
+		if(ipAddress.getText().isEmpty())
+		{
+			final Popup p=new Popup();
+			Label l = new Label("No adress entered");
+			Button hide = new Button("OK");
+			hide.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent arg0) {
+					p.hide();					
+				}
+			});
+			GridPane gp=new GridPane();
+			gp.add(l,0,0);
+			gp.add(hide, 0, 1);
+			p.getContent().addAll(gp);
+			//p.show(primaryStage);
+		}else {
+			try {
+				String[] qqc = model.getIps(ipAddress.getText());
+			} catch (IOException | InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public GenerateRandomAdress getRandomAddress(TextField address)

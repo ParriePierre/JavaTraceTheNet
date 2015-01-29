@@ -24,6 +24,8 @@ public class IpMatcher {
         String ip;
         String[] ips=new String[200];
         
+        System.out.print(adress);
+        
         TraceRouteExec trace = new TraceRouteExec(adress);
         ip = trace.getIp();
         int i = 0;
