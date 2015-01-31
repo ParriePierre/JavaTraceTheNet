@@ -8,23 +8,26 @@ import view.TraceRouteUI;
 
 public class MainClass {
 
+	private static IpMatcher ip;
+	
 	/**
 	 * @param args
 	 */
-    
 	public static void main(String[] args) {
 		
 		try {
-			//TraceRouteExec tre = new TraceRouteExec();
-            IpMatcher ip = new IpMatcher();
-			TraceRouteUI trui=new TraceRouteUI();
+            ip = new IpMatcher();
 			Controller c=new Controller();
-			c.setView(trui);
-			c.setModel(ip);
 			c.start();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
+	protected static IpMatcher getModel()
+	{
+		return ip;
+	}
+	
 
 }

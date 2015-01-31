@@ -23,24 +23,16 @@ import view.TraceRouteUI;
 
 public class Controller extends Application {
 	
-	public TraceRouteUI view;
-	
 	public IpMatcher model;
 	
 	@FXML
 	private TextField ipAddress;
 	
-	public void setView(TraceRouteUI view)
+	public Controller()
 	{
-		this.view=view;
-		view.setController(this);
+		super();
+		model=MainClass.getModel();
 	}
-	
-	public void setModel(IpMatcher model)
-	{
-		this.model=model;
-	}
-	
 	/**
 	 * Launches start(Stage arg0)
 	 */
