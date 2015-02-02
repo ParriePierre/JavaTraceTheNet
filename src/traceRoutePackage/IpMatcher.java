@@ -17,36 +17,45 @@ public class IpMatcher {
             + "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
             + "([01]?\\d\\d?|2[0-4]\\d|25[0-5]))|"
             + "((\\d\\d\\d)\\.(\\d\\d\\d)|(\\d\\d)\\.(\\d\\d\\d)|(\\d)\\.(\\d\\d\\d))";
-    String[] ips = new String[200];
-
-    public IpMatcher(String adress) throws IOException, InterruptedException{
+    
+    /**
+     * Launch Fakeroute and store the result in the returned table
+     * 
+     * @param adress
+     * The adress of the server to ping as URL or IP adress
+     * @return
+     * Returns a table of all the times and IPs find by traceroute.
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    public String[] getIps(String adress, int mode) throws IOException, InterruptedException{
         Pattern pattern;
         Matcher matcher;
         String ip;
+        String[] ips=new String[200];
         
-        TraceRouteExec trace = new TraceRouteExec(adress);
+        //System.out.print(adress);
+      
+        TraceRouteExec trace = new TraceRouteExec(adress, mode);
         ip = trace.getIp();
         int i = 0;
+        
         System.out.println(ip);
-
+        
         try {
 
-            pattern = Pattern.compile(IPADDRESS_PATTERN);
-            matcher = pattern.matcher(ip);
-            while (matcher.find()) {
+        	pattern = Pattern.compile(IPADDRESS_PATTERN);
+        	matcher = pattern.matcher(ip);
+        	while (matcher.find()) {
 
-                ips[i] = matcher.group();
-
-                System.out.println(ips[i]);
-                i++;
-            }
+        		ips[i] = matcher.group();
+        		i++;
+        	}
         } catch (PatternSyntaxException pse) {
-            pse.printStackTrace();
+        	pse.printStackTrace();
         }
+        
+		return ips;
     }
-    
-    public String[] getip(){
-        return ips;
-    }
-
+   
 }

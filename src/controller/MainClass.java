@@ -1,36 +1,30 @@
 package controller;
 
-import java.io.IOException;
-
-import controller.Controller;
-import traceRoutePackage.*;
-import view.TraceRouteUI;
+import traceRoutePackage.IpMatcher;
 
 
 public class MainClass {
 
+	private static IpMatcher ip;
+	
 	/**
 	 * @param args
 	 */
-    
 	public static void main(String[] args) {
 		
 		try {
-			//TraceRouteExec tre = new TraceRouteExec();
-                        IpMatcher ip = new IpMatcher("ece.fr");
-                        ip.getip();
-			TraceRouteUI trui=new TraceRouteUI();
+            ip = new IpMatcher();
 			Controller c=new Controller();
-			c.setView(trui);
-			c.setModel(ip);
 			c.start();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
+	protected static IpMatcher getModel()
+	{
+		return ip;
+	}
+	
 
 }
