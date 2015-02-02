@@ -1,6 +1,5 @@
 package view;
 
-import javafx.scene.*;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

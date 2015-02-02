@@ -29,22 +29,22 @@ public class IpMatcher {
         TraceRouteExec trace = new TraceRouteExec(adress);
         ip = trace.getIp();
         int i = 0;
-        System.out.println(ip);
 
         try {
 
-            pattern = Pattern.compile(IPADDRESS_PATTERN);
-            matcher = pattern.matcher(ip);
-            while (matcher.find()) {
-       
-                ips[i] = matcher.group();
+        	pattern = Pattern.compile(IPADDRESS_PATTERN);
+        	matcher = pattern.matcher(ip);
+        	while (matcher.find()) {
 
-                System.out.println(ips[i]);
-                i++;
-            }
+        		ips[i] = matcher.group();
+
+        		//System.out.println(ips[i]);
+        		i++;
+        	}
         } catch (PatternSyntaxException pse) {
-            pse.printStackTrace();
+        	pse.printStackTrace();
         }
+        
 		return ips;
     }
    

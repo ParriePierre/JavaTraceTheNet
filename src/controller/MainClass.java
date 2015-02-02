@@ -1,12 +1,13 @@
 package controller;
 
-import java.io.IOException;
-
 import traceRoutePackage.IpMatcher;
-import view.TraceRouteUI;
 
 
 public class MainClass {
+	/*static{System.loadLibrary("gvc");
+	System.loadLibrary("cgraph");
+	System.loadLibrary("cdt");
+	}*/
 
 	private static IpMatcher ip;
 	
@@ -16,6 +17,7 @@ public class MainClass {
 	public static void main(String[] args) {
 		
 		try {
+			//System.out.println(System.getProperty("java.library.path"));
             ip = new IpMatcher();
 			Controller c=new Controller();
 			c.start();
