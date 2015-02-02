@@ -7,9 +7,6 @@ public class MainClass {
 
 	private static IpMatcher ip;
 	
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		
 		try {

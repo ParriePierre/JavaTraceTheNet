@@ -15,8 +15,12 @@ public class TraceRouteExec {
      * Launche the Fakeroute process and store the entire output in a string
      * @param Adress
      * The adress of the server to trace
+     * @param mode
+     * Function that should be used 0 fakeroute 1 traceroute 2 tracert 
      * @throws IOException
+     * Basic error handling
      * @throws InterruptedException
+     * Basic error handling
      */
     public TraceRouteExec(String Adress, int mode) throws IOException, InterruptedException {
         adress = Adress;
