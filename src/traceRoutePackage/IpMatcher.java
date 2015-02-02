@@ -28,7 +28,7 @@ public class IpMatcher {
      * @throws IOException
      * @throws InterruptedException
      */
-    public String[] getIps(String adress) throws IOException, InterruptedException{
+    public String[] getIps(String adress, int mode) throws IOException, InterruptedException{
         Pattern pattern;
         Matcher matcher;
         String ip;
@@ -36,7 +36,7 @@ public class IpMatcher {
         
         //System.out.print(adress);
       
-        TraceRouteExec trace = new TraceRouteExec(adress);
+        TraceRouteExec trace = new TraceRouteExec(adress, mode);
         ip = trace.getIp();
         int i = 0;
         

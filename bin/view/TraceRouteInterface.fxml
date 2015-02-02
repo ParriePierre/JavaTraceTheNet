@@ -1,20 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.embed.swing.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="bp" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ViewController">
-   <top>
-      <HBox prefHeight="0.0" prefWidth="1917.0" spacing="4.0" BorderPane.alignment="CENTER">
+<BorderPane fx:id="bp" prefHeight="480.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ViewController">
+   <right>
+      <VBox prefHeight="200.0" prefWidth="150.0" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" prefHeight="25.0" prefWidth="800.0" text="IP Address" />
             <TextField fx:id="ipAddress" alignment="CENTER" prefHeight="25.0" prefWidth="800.0" />
-            <Button fx:id="generateRandomIP" alignment="CENTER" mnemonicParsing="false" onAction="#generateRandomIpButton" prefWidth="800.0" text="Generate Random Ip" />
+            <Button fx:id="generateRandomIP" alignment="CENTER" mnemonicParsing="false" onAction="#generateRandomIpButton" prefWidth="800.0" text="Random Ip" textAlignment="CENTER" />
             <Button fx:id="traceRoute" alignment="CENTER" mnemonicParsing="false" onAction="#traceRouteButton" prefWidth="800.0" text="Trace It" />
          </children>
-      </HBox>
+      </VBox>
+   </right>
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#emptyGraph" text="Empty Graph" />
+              <MenuItem mnemonicParsing="false" onAction="#exit" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#useFakeroute" text="Use Fakeroute" />
+                  <MenuItem mnemonicParsing="false" onAction="#useTraceroute" text="Use Traceroute" />
+                  <MenuItem mnemonicParsing="false" onAction="#useTracert" text="Use Tracert" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
    </top>
 </BorderPane>
