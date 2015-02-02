@@ -1,12 +1,9 @@
 package controller;
 
-import java.io.IOException;
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -15,9 +12,6 @@ import traceRoutePackage.IpMatcher;
 public class Controller extends Application {
 	
 	public IpMatcher model;
-	
-	@FXML
-	private BorderPane bp;
 	
 	public Controller()
 	{
@@ -33,7 +27,8 @@ public class Controller extends Application {
 	}
 	
 	/**
-	 * Initialize téhe view
+	 * Initializes the view
+	 * Load the XML file
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -43,27 +38,12 @@ public class Controller extends Application {
         
         FXMLLoader loader =new FXMLLoader();
         loader.setLocation(getClass().getResource("/view/TraceRouteInterface.fxml"));
-        bp= (BorderPane) loader.load();
+        BorderPane bp= (BorderPane) loader.load();
                    
         root.getChildren().add(bp);
         
         primaryStage.setScene(scene);
         primaryStage.show();
-	}
-	
-	public GenerateRandomAdress getRandomAddress(TextField address)
-	{
-		return new GenerateRandomAdress(address);
-	}
-	
-	public TraceRouteAction getTraceAction(IpMatcher model, TextField address, Stage primaryStage, Controller ct)
-	{
-		return new TraceRouteAction(model, address,primaryStage, ct);
-	}
-	
-	public String[] traceRoute (String address) throws IOException, InterruptedException
-	{
-		return model.getIps(address);
 	}
 
 }

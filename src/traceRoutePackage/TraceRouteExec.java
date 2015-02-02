@@ -10,7 +10,14 @@ public class TraceRouteExec {
 
     String chaine = "";
     String adress;
-
+    
+    /**
+     * Launche the Fakeroute process and store the entire output in a string
+     * @param Adress
+     * The adress of the server to trace
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public TraceRouteExec(String Adress) throws IOException, InterruptedException {
         adress = Adress;
         //Launches the sub process

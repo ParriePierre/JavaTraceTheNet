@@ -23,6 +23,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
+/**
+ * Controller class of TraceRouteInterface.xml
+ * 
+ * We used Scene Builder to design our application.
+ * 
+ * @author parrie
+ *
+ */
 public class ViewController implements Initializable {
 	
 	public IpMatcher model;
@@ -32,6 +40,12 @@ public class ViewController implements Initializable {
     + "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
     + "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
     + "([01]?\\d\\d?|2[0-4]\\d|25[0-5]))";
+	
+	private static final String STAR_PATTERN
+    = "(\\*)";
+	
+	private static final String TIME_PATTERN
+	= "((\\d\\d\\d)\\.(\\d\\d\\d)|(\\d\\d)\\.(\\d\\d\\d)|(\\d)\\.(\\d\\d\\d))";
 
 	@FXML
 	private TextField ipAddress;
@@ -45,6 +59,11 @@ public class ViewController implements Initializable {
 	
 	private View view;
 	
+	/**
+	 * Initialize:
+	 * - the graph and its view/viewer, which are used only for view purpose
+	 * - the model
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		model=MainClass.getModel();
@@ -73,6 +92,9 @@ public class ViewController implements Initializable {
         });
     }
 	
+	/**
+	 * Build a string which suits an IP adress
+	 */
 	@FXML
 	private void generateRandomIpButton()
 	{
@@ -95,6 +117,9 @@ public class ViewController implements Initializable {
 		ipAddress.setText(sb.toString());
 	}
 	
+	/**
+	 * Manage to read all IP and sort them so that it makes a tree
+	 */
 	@FXML
 	private void traceRouteButton()
 	{
@@ -104,30 +129,54 @@ public class ViewController implements Initializable {
 		}else {
 			try {
 				String[] qqc =model.getIps(ipAddress.getText());
-				for(int i=0; i<qqc.length;i++)
+				int j=3;
+				
+				Node ParentNode=graph.getNode(qqc[0]);
+				if(ParentNode==null)
+				{
+					graph.addNode(qqc[0]);
+					ParentNode=graph.getNode(qqc[0]);
+				}
+				Node ActualNode=null;
+				for(int i=1; i<qqc.length;i++)
 				{
 					if(qqc[i] != null)
 					{
 						Pattern pattern = Pattern.compile(IPADDRESS_PATTERN);
 						Matcher matcher = pattern.matcher(qqc[i]);
+						Pattern pattern2 = Pattern.compile(STAR_PATTERN);
+						Matcher matcher2 = pattern2.matcher(qqc[i]);
+						Pattern pattern3 = Pattern.compile(TIME_PATTERN);
+						Matcher matcher3 = pattern3.matcher(qqc[i]);
 						if(matcher.find())
 						{
 							try
 							{
 								graph.addNode(qqc[i]);
+								ActualNode=graph.getNode(qqc[i]);
+								graph.addEdge(ActualNode.getId()+ " " + ParentNode.getId(), ActualNode.getId(), ParentNode.getId());
 							}catch(IdAlreadyInUseException e)
 							{}
-						} else
+						} else if (matcher2.find())
 						{
-							
+							j--;
+							if(j==0)
+							{
+								j=3;
+								ParentNode=ActualNode;
+							}
+						} else if (matcher3.find())
+						{
+							j--;
+							if(j==0)
+							{
+								j=3;
+								ParentNode=ActualNode;
+							}
 						}
 					}
 				}
-				Node previousNode=null;
 				for(Node n:graph) {
-					if(previousNode!=null)
-						graph.addEdge(n.getId()+ " " + previousNode.getId(), n.getId(), previousNode.getId());
-					previousNode=n;
 					n.addAttribute("ui.label", n.getId());
 				}
 			} catch (IOException | InterruptedException e) {
