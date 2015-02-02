@@ -19,7 +19,7 @@ public class Controller extends Application {
 		model=MainClass.getModel();
 	}
 	/**
-	 * Launches start(Stage arg0)
+	 * Launches start(Stage arg0), start the application
 	 */
 	public void start()
 	{	
